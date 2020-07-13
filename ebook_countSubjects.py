@@ -1,5 +1,8 @@
 import sys, re, uuid, csv
+from scipy import stats
 import pandas as pd
+
+#use bibs_201910_ebookvid_webpacdata_4_10_2020.csv
 
 with open(sys.argv[1], 'rU', errors='ignore') as csvFile, open(sys.argv[2],'w') as csvOut:
     # reader = csv.DictReader(csvFile)
@@ -49,5 +52,8 @@ with open(sys.argv[1], 'rU', errors='ignore') as csvFile, open(sys.argv[2],'w') 
     # newdf['subjectCount'] = df['subjectCount'].fillna('0')
     newdf['clicks'] = df['clicks'].fillna(0).astype(int)
 
+    # newdf = newdf.dropna()
+    print(stats.spearmanr(newdf['subjectCount'], newdf['clicks']))
+
     # #
-    print(newdf.corr('kendall'))
+    # print(newdf.corr('spearman'))
